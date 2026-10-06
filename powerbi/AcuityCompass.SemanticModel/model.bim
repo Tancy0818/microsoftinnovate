@@ -1,0 +1,960 @@
+{
+  "compatibilityLevel": 1606,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"dates\",\"areas\",\"department_hourly\",\"area_capacity_hourly\",\"visits\",\"interactive_patients\",\"operational_daily\",\"operational_areas\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-GB",
+    "cultures": [
+      {
+        "name": "en-GB",
+        "linguisticMetadata": {
+          "content": {
+            "Entities": {
+              "areas.area_name": {
+                "Binding": {
+                  "ConceptualEntity": "areas",
+                  "ConceptualProperty": "area_name"
+                },
+                "State": "Generated"
+              },
+              "dates.report_date": {
+                "Binding": {
+                  "ConceptualEntity": "dates",
+                  "ConceptualProperty": "report_date"
+                },
+                "State": "Generated"
+              },
+              "department_hourly.active_patients": {
+                "Binding": {
+                  "ConceptualEntity": "department_hourly",
+                  "ConceptualProperty": "Active patients"
+                },
+                "State": "Generated"
+              },
+              "department_hourly.area_bed_occupancy": {
+                "Binding": {
+                  "ConceptualEntity": "department_hourly",
+                  "ConceptualProperty": "Area bed occupancy"
+                },
+                "State": "Generated"
+              },
+              "department_hourly.bed_occupancy": {
+                "Binding": {
+                  "ConceptualEntity": "department_hourly",
+                  "ConceptualProperty": "Bed occupancy"
+                },
+                "State": "Generated"
+              },
+              "department_hourly.patients_waiting": {
+                "Binding": {
+                  "ConceptualEntity": "department_hourly",
+                  "ConceptualProperty": "Patients waiting"
+                },
+                "State": "Generated"
+              },
+              "department_hourly.snapshot_label": {
+                "Binding": {
+                  "ConceptualEntity": "department_hourly",
+                  "ConceptualProperty": "Snapshot label"
+                },
+                "State": "Generated"
+              },
+              "department_hourly.total_arrivals": {
+                "Binding": {
+                  "ConceptualEntity": "department_hourly",
+                  "ConceptualProperty": "Total arrivals"
+                },
+                "State": "Generated"
+              },
+              "department_hourly.total_departures": {
+                "Binding": {
+                  "ConceptualEntity": "department_hourly",
+                  "ConceptualProperty": "Total departures"
+                },
+                "State": "Generated"
+              },
+              "department_hourly.visit_count": {
+                "Binding": {
+                  "ConceptualEntity": "department_hourly",
+                  "ConceptualProperty": "Visit count"
+                },
+                "State": "Generated"
+              },
+              "visits.triage_level": {
+                "Binding": {
+                  "ConceptualEntity": "visits",
+                  "ConceptualProperty": "triage_level"
+                },
+                "State": "Generated"
+              }
+            },
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "relationships": [
+      {
+        "name": "relationship_1",
+        "fromColumn": "report_date",
+        "fromTable": "department_hourly",
+        "toColumn": "report_date",
+        "toTable": "dates"
+      },
+      {
+        "name": "relationship_2",
+        "fromColumn": "report_date",
+        "fromTable": "area_capacity_hourly",
+        "toColumn": "report_date",
+        "toTable": "dates"
+      },
+      {
+        "name": "relationship_3",
+        "fromColumn": "arrival_date",
+        "fromTable": "visits",
+        "toColumn": "report_date",
+        "toTable": "dates"
+      },
+      {
+        "name": "relationship_4",
+        "fromColumn": "area_id",
+        "fromTable": "area_capacity_hourly",
+        "toColumn": "area_id",
+        "toTable": "areas"
+      }
+    ],
+    "sourceQueryCulture": "en-GB",
+    "tables": [
+      {
+        "name": "dates",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "report_date",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "dd MMM yyyy",
+            "lineageTag": "b5f66a3b-b9dd-4d56-9d37-713ce978d06d",
+            "sourceColumn": "report_date",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "4208abaa-bee4-4565-84f5-8225704cb83c",
+        "partitions": [
+          {
+            "name": "dates",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = PostgreSQL.Database(\"127.0.0.1:5433\", \"acuitycompass\", [Query=\"SELECT report_date FROM public.dates\", CreateNavigationProperties=false]),",
+                "    Typed = Table.TransformColumnTypes(Source, {{\"report_date\", type date}})",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "areas",
+        "columns": [
+          {
+            "name": "area_id",
+            "dataType": "string",
+            "lineageTag": "bf642354-fecf-4375-a7f9-538cbb996f10",
+            "sourceColumn": "area_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "area_name",
+            "dataType": "string",
+            "lineageTag": "11654424-43d2-49ee-bee5-29b5f9d78916",
+            "sourceColumn": "area_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "is_bed_area",
+            "dataType": "int64",
+            "lineageTag": "7454c2db-df44-4e60-a979-d2fe1d54908c",
+            "sourceColumn": "is_bed_area",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "c1158df2-6ff1-4f2c-9f55-723dad25c546",
+        "partitions": [
+          {
+            "name": "areas",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = PostgreSQL.Database(\"127.0.0.1:5433\", \"acuitycompass\", [Query=\"SELECT area_id, area_name, is_bed_area FROM public.areas\", CreateNavigationProperties=false]),",
+                "    Typed = Table.TransformColumnTypes(Source, {{\"area_id\", type text}, {\"area_name\", type text}, {\"is_bed_area\", Int64.Type}})",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "department_hourly",
+        "columns": [
+          {
+            "name": "hour_start",
+            "dataType": "dateTime",
+            "formatString": "dd MMM yyyy HH:mm",
+            "lineageTag": "56b600ef-9833-4ee4-bfc8-85bd774bcaf0",
+            "sourceColumn": "hour_start",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "snapshot_time",
+            "dataType": "dateTime",
+            "formatString": "dd MMM yyyy HH:mm",
+            "lineageTag": "da5f239b-3e86-48ae-a8ec-e37709dab30f",
+            "sourceColumn": "snapshot_time",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "report_date",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "dd MMM yyyy",
+            "lineageTag": "af5bb580-6770-4eec-b9be-e2685c028125",
+            "sourceColumn": "report_date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "arrivals",
+            "dataType": "int64",
+            "lineageTag": "5d4a817f-bc00-4713-b163-ba42c1ec7f37",
+            "sourceColumn": "arrivals",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "departures",
+            "dataType": "int64",
+            "lineageTag": "3f01739e-bc7a-49e8-9437-6aeef84a5351",
+            "sourceColumn": "departures",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "active_patients",
+            "dataType": "int64",
+            "lineageTag": "0159b66c-f58f-465d-bd6d-b4472b31855f",
+            "sourceColumn": "active_patients",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "patients_waiting",
+            "dataType": "int64",
+            "lineageTag": "a75a97ec-68eb-4f18-a682-6353271a2657",
+            "sourceColumn": "patients_waiting",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "average_elapsed_wait_minutes",
+            "dataType": "double",
+            "lineageTag": "ff323c6d-11f7-4fdf-a7e2-cfb02fc14861",
+            "sourceColumn": "average_elapsed_wait_minutes",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "occupied_beds",
+            "dataType": "int64",
+            "lineageTag": "ebe95c89-175b-44f3-84eb-922e865625bc",
+            "sourceColumn": "occupied_beds",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "staffed_beds",
+            "dataType": "int64",
+            "lineageTag": "4c8e90ae-7630-46b1-9801-5eb04568e286",
+            "sourceColumn": "staffed_beds",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "c4c50753-6722-4013-b0f2-9d219f3e0136",
+        "measures": [
+          {
+            "name": "Total arrivals",
+            "displayFolder": "Dashboard metrics",
+            "expression": "SUM(department_hourly[arrivals])",
+            "formatString": "#,0",
+            "lineageTag": "4989ca38-7240-46e8-a24d-c89da828a201"
+          },
+          {
+            "name": "Total departures",
+            "displayFolder": "Dashboard metrics",
+            "expression": "SUM(department_hourly[departures])",
+            "formatString": "#,0",
+            "lineageTag": "125a04a9-3b6d-4042-90b7-cb5e3853a373"
+          },
+          {
+            "name": "Latest snapshot",
+            "displayFolder": "Dashboard metrics",
+            "expression": "MAX(department_hourly[snapshot_time])",
+            "formatString": "dd MMM yyyy HH:mm",
+            "lineageTag": "e4bdbf1b-96a5-4147-b7b5-32ce6463ec67"
+          },
+          {
+            "name": "Active patients",
+            "displayFolder": "Dashboard metrics",
+            "expression": "VAR S = [Latest snapshot] RETURN IF(ISBLANK(S), BLANK(), CALCULATE(MAX(department_hourly[active_patients]), department_hourly[snapshot_time] = S))",
+            "formatString": "#,0",
+            "lineageTag": "a423a7ba-42eb-4c30-b8f2-1b652f5ba9ef"
+          },
+          {
+            "name": "Patients waiting",
+            "displayFolder": "Dashboard metrics",
+            "expression": "VAR S = [Latest snapshot] RETURN IF(ISBLANK(S), BLANK(), CALCULATE(MAX(department_hourly[patients_waiting]), department_hourly[snapshot_time] = S))",
+            "formatString": "#,0",
+            "lineageTag": "56d6b722-3a68-4830-94e5-bd5ace163f87"
+          },
+          {
+            "name": "Bed occupancy",
+            "displayFolder": "Dashboard metrics",
+            "expression": "VAR S = [Latest snapshot] VAR O = CALCULATE(MAX(department_hourly[occupied_beds]), department_hourly[snapshot_time] = S) VAR C = CALCULATE(MAX(department_hourly[staffed_beds]), department_hourly[snapshot_time] = S) RETURN IF(ISBLANK(S), BLANK(), DIVIDE(O,C))",
+            "formatString": "0.00%",
+            "lineageTag": "83d4c5fc-7fe8-400c-9fce-1ab773fde483"
+          },
+          {
+            "name": "Area bed occupancy",
+            "displayFolder": "Dashboard metrics",
+            "expression": "VAR S = [Latest snapshot] VAR O = CALCULATE(SUM(area_capacity_hourly[occupied]), area_capacity_hourly[snapshot_time] = S, area_capacity_hourly[is_bed_area] = 1) VAR C = CALCULATE(SUM(area_capacity_hourly[staffed_capacity]), area_capacity_hourly[snapshot_time] = S, area_capacity_hourly[is_bed_area] = 1) RETURN IF(ISBLANK(S), BLANK(), DIVIDE(O,C))",
+            "formatString": "0.0%",
+            "lineageTag": "e8d45aa6-bc80-4cb8-af65-53ce33385368"
+          },
+          {
+            "name": "Visit count",
+            "displayFolder": "Dashboard metrics",
+            "expression": "COUNTROWS(visits)",
+            "formatString": "#,0",
+            "lineageTag": "4430d743-c33d-423d-8081-503befbb171f"
+          },
+          {
+            "name": "Current queue average wait",
+            "displayFolder": "Dashboard metrics",
+            "expression": "VAR S = [Latest snapshot] RETURN IF(ISBLANK(S), BLANK(), CALCULATE(MAX(department_hourly[average_elapsed_wait_minutes]), department_hourly[snapshot_time] = S))",
+            "formatString": "0.0 \"min\"",
+            "lineageTag": "014c1a1f-08f3-4c57-8cbf-eb971ccac564"
+          },
+          {
+            "name": "Average wait to assessment",
+            "displayFolder": "Dashboard metrics",
+            "expression": "AVERAGE(visits[wait_to_assessment_minutes])",
+            "formatString": "0.0 \"min\"",
+            "lineageTag": "fb871b15-8623-4221-8b42-09975590d0f1"
+          },
+          {
+            "name": "Snapshot label",
+            "displayFolder": "Dashboard metrics",
+            "expression": "IF(ISBLANK([Latest snapshot]), \"No records loaded\", \"Snapshot: \" & FORMAT([Latest snapshot], \"dd MMM yyyy HH:mm\") & \" IST | Historical synthetic data\")",
+            "lineageTag": "a2be69a4-47d8-42c7-9fdd-a11fd0d02a19"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "department_hourly",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = PostgreSQL.Database(\"127.0.0.1:5433\", \"acuitycompass\", [Query=\"SELECT hour_start AT TIME ZONE 'Asia/Kolkata' AS hour_start, snapshot_time AT TIME ZONE 'Asia/Kolkata' AS snapshot_time, report_date, arrivals, departures, active_patients, patients_waiting, average_elapsed_wait_minutes, occupied_beds, staffed_beds FROM reporting.department_hourly\", CreateNavigationProperties=false]),",
+                "    Typed = Table.TransformColumnTypes(Source, {{\"hour_start\", type datetime}, {\"snapshot_time\", type datetime}, {\"report_date\", type date}, {\"arrivals\", Int64.Type}, {\"departures\", Int64.Type}, {\"active_patients\", Int64.Type}, {\"patients_waiting\", Int64.Type}, {\"average_elapsed_wait_minutes\", type number}, {\"occupied_beds\", Int64.Type}, {\"staffed_beds\", Int64.Type}})",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "area_capacity_hourly",
+        "columns": [
+          {
+            "name": "snapshot_time",
+            "dataType": "dateTime",
+            "formatString": "dd MMM yyyy HH:mm",
+            "lineageTag": "0b4f871e-01f3-4a58-9c92-c916e53a3ce3",
+            "sourceColumn": "snapshot_time",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "report_date",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "dd MMM yyyy",
+            "lineageTag": "68f36cea-fb86-443e-b9ef-26c5cfca9305",
+            "sourceColumn": "report_date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "area_id",
+            "dataType": "string",
+            "lineageTag": "6b66fc5e-a85e-4acd-843a-077e8578b852",
+            "sourceColumn": "area_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "occupied",
+            "dataType": "int64",
+            "lineageTag": "be7cc3de-beff-4e5c-a31b-c2ed7852660b",
+            "sourceColumn": "occupied",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "staffed_capacity",
+            "dataType": "int64",
+            "lineageTag": "b09f8780-d9cd-4f4f-adda-503425c021f6",
+            "sourceColumn": "staffed_capacity",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "is_bed_area",
+            "dataType": "int64",
+            "lineageTag": "2f307cd3-23e6-4091-bac0-8d3d7d3df0d6",
+            "sourceColumn": "is_bed_area",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "5cb05dd8-a2c2-4aaa-8213-60cf62f9ddc8",
+        "partitions": [
+          {
+            "name": "area_capacity_hourly",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = PostgreSQL.Database(\"127.0.0.1:5433\", \"acuitycompass\", [Query=\"SELECT snapshot_time AT TIME ZONE 'Asia/Kolkata' AS snapshot_time, report_date, area_id, occupied, staffed_capacity, is_bed_area FROM reporting.area_capacity_hourly\", CreateNavigationProperties=false]),",
+                "    Typed = Table.TransformColumnTypes(Source, {{\"snapshot_time\", type datetime}, {\"report_date\", type date}, {\"area_id\", type text}, {\"occupied\", Int64.Type}, {\"staffed_capacity\", Int64.Type}, {\"is_bed_area\", Int64.Type}})",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "visits",
+        "columns": [
+          {
+            "name": "visit_id",
+            "dataType": "string",
+            "lineageTag": "0d40753b-8b02-4b34-be4f-ef5ba4d2af07",
+            "sourceColumn": "visit_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "arrival_date",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "dd MMM yyyy",
+            "lineageTag": "f7e55485-c42f-4f01-851e-7a70ac95a201",
+            "sourceColumn": "arrival_date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "triage_level",
+            "dataType": "string",
+            "lineageTag": "3f16de2b-d0f7-4d3b-b398-5cebe55f3596",
+            "sortByColumn": "triage_order",
+            "sourceColumn": "triage_level",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "wait_to_assessment_minutes",
+            "dataType": "double",
+            "lineageTag": "45043d8e-ec2d-4170-aafb-ef4c7a083e3d",
+            "sourceColumn": "wait_to_assessment_minutes",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "triage_order",
+            "dataType": "int64",
+            "isHidden": true,
+            "lineageTag": "27dd99fd-d311-4ae3-b017-13d24e6ae326",
+            "sourceColumn": "triage_order",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "a44d34dd-2c5f-4d50-8c50-ac479d448d40",
+        "partitions": [
+          {
+            "name": "visits",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = PostgreSQL.Database(\"127.0.0.1:5433\", \"acuitycompass\", [Query=\"SELECT visit_id, arrival_date, triage_level, wait_to_assessment_minutes, CASE triage_level WHEN 'Red' THEN 1 WHEN 'Orange' THEN 2 WHEN 'Yellow' THEN 3 WHEN 'Green' THEN 4 ELSE 5 END AS triage_order FROM public.visits\", CreateNavigationProperties=false]),",
+                "    Typed = Table.TransformColumnTypes(Source, {{\"visit_id\", type text}, {\"arrival_date\", type date}, {\"triage_level\", type text}, {\"wait_to_assessment_minutes\", type number}, {\"triage_order\", Int64.Type}})",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "interactive_patients",
+        "columns": [
+          {
+            "name": "visit_id",
+            "dataType": "string",
+            "lineageTag": "0896647f-e77e-404b-99eb-f8b909eaf91e",
+            "sourceColumn": "visit_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "arrival_time",
+            "dataType": "dateTime",
+            "formatString": "dd MMM yyyy HH:mm:ss",
+            "lineageTag": "a2bff5b2-c0c2-4a3a-bbe5-653f08e7675f",
+            "sourceColumn": "arrival_time",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "arrival_method",
+            "dataType": "string",
+            "lineageTag": "c1fe6a99-a8ac-44e6-9fb1-532df20ce229",
+            "sourceColumn": "arrival_method",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "stage",
+            "dataType": "string",
+            "lineageTag": "84bc62fe-4941-4c19-9f24-6d8398acc1b4",
+            "sourceColumn": "stage",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "triage_level",
+            "dataType": "string",
+            "lineageTag": "7cc9175f-3cd0-4b1c-8ae8-02b0de8ca33f",
+            "sourceColumn": "triage_level",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "area_name",
+            "dataType": "string",
+            "lineageTag": "09c3e15d-6b79-4920-908c-0207c2fe721c",
+            "sourceColumn": "area_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "bed_number",
+            "dataType": "int64",
+            "lineageTag": "f5fb5033-30b8-4fd5-87d0-1c40aafc5a22",
+            "sourceColumn": "bed_number",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "latest_event_time",
+            "dataType": "dateTime",
+            "formatString": "dd MMM yyyy HH:mm:ss",
+            "lineageTag": "d49043c5-0a51-44d2-822f-c90be54c5c84",
+            "sourceColumn": "latest_event_time",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "active_count",
+            "dataType": "int64",
+            "lineageTag": "ddc77666-c1df-48f8-87ff-6d59fff8f1d3",
+            "sourceColumn": "active_count",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "waiting_count",
+            "dataType": "int64",
+            "lineageTag": "8661b395-dee1-4f23-848c-edbd3c847bef",
+            "sourceColumn": "waiting_count",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "occupied_count",
+            "dataType": "int64",
+            "lineageTag": "226b784d-8576-4812-b9d8-574eccae3d5a",
+            "sourceColumn": "occupied_count",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "departed_count",
+            "dataType": "int64",
+            "lineageTag": "b0026dfb-fd42-4db9-986b-731c2f7f38a5",
+            "sourceColumn": "departed_count",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "staffed_beds",
+            "dataType": "int64",
+            "lineageTag": "4315ea0c-8e99-46c8-a5b0-24dabcfd2999",
+            "sourceColumn": "staffed_beds",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "refreshed_at",
+            "dataType": "dateTime",
+            "formatString": "dd MMM yyyy HH:mm:ss",
+            "lineageTag": "9a75dde4-41d8-490e-b68b-a638a5825282",
+            "sourceColumn": "refreshed_at",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "1aca6256-572e-4c4d-8301-0a4c0a58726a",
+        "measures": [
+          {
+            "name": "Entered visits",
+            "expression": "COUNTA(interactive_patients[visit_id])",
+            "formatString": "#,0",
+            "lineageTag": "320168a2-8c65-48ba-bb9b-b1cf5d387bae"
+          },
+          {
+            "name": "Current active",
+            "expression": "SUM(interactive_patients[active_count])",
+            "formatString": "#,0",
+            "lineageTag": "6ce7cb91-fd1a-44a4-90bc-f4f6c0ad90b5"
+          },
+          {
+            "name": "Current waiting",
+            "expression": "SUM(interactive_patients[waiting_count])",
+            "formatString": "#,0",
+            "lineageTag": "11d222a0-8b33-44e8-acce-bb100d5b235f"
+          },
+          {
+            "name": "Current occupancy",
+            "expression": "DIVIDE(SUM(interactive_patients[occupied_count]), MAX(interactive_patients[staffed_beds]), 0)",
+            "formatString": "0.00%",
+            "lineageTag": "d0bb54f5-df4b-443c-a392-d6d4895d4a7c"
+          },
+          {
+            "name": "Completed departures",
+            "expression": "SUM(interactive_patients[departed_count])",
+            "formatString": "#,0",
+            "lineageTag": "4b50392a-7c61-4def-9418-2029edc11148"
+          },
+          {
+            "name": "Refresh label",
+            "expression": "\"Refreshed: \" & FORMAT(MAX(interactive_patients[refreshed_at]), \"dd MMM yyyy HH:mm\") & \" IST | Home > Refresh after website changes\"",
+            "lineageTag": "93e69c9a-429a-4959-8a3d-e81d3318ce86"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "interactive_patients",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = PostgreSQL.Database(\"127.0.0.1:5433\", \"acuitycompass\", [CreateNavigationProperties=false]),",
+                "    Patients = Source{[Schema=\"reporting\",Item=\"interactive_patients\"]}[Data]",
+                "in",
+                "    Patients"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "operational_daily",
+        "columns": [
+          {
+            "name": "report_date",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "dd MMM yyyy",
+            "lineageTag": "4537d1d1-381a-485d-9efd-78646a77e216",
+            "sourceColumn": "report_date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "arrivals",
+            "dataType": "int64",
+            "lineageTag": "de2e1a34-8df8-46f0-b8ac-209846a1fcbd",
+            "sourceColumn": "arrivals",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "departures",
+            "dataType": "int64",
+            "lineageTag": "66f26e92-8fd5-4a6e-b620-8f401894f9d7",
+            "sourceColumn": "departures",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "26bf7232-beef-4692-b963-b3ec80fae787",
+        "measures": [
+          {
+            "name": "Daily arrivals",
+            "expression": "SUM(operational_daily[arrivals])",
+            "formatString": "#,0",
+            "lineageTag": "4402137a-aeaa-4759-9dd4-1899ed404dad"
+          },
+          {
+            "name": "Daily departures",
+            "expression": "SUM(operational_daily[departures])",
+            "formatString": "#,0",
+            "lineageTag": "09131c86-25b5-49c6-9328-5649159de9cb"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "operational_daily",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                " Source = PostgreSQL.Database(\"127.0.0.1:5433\", \"acuitycompass\", [CreateNavigationProperties=false]),",
+                " Data = Source{[Schema=\"reporting\",Item=\"operational_daily\"]}[Data]",
+                "in",
+                " Data"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "operational_areas",
+        "columns": [
+          {
+            "name": "area_name",
+            "dataType": "string",
+            "lineageTag": "199a8802-5d7b-46af-bc13-d65f5665abc8",
+            "sourceColumn": "area_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "staffed_capacity",
+            "dataType": "int64",
+            "lineageTag": "56678d2d-2d36-4619-b3d9-88cdb3488dd0",
+            "sourceColumn": "staffed_capacity",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "occupied",
+            "dataType": "int64",
+            "lineageTag": "8ecc8d9b-ac6c-4e01-9e4a-ee4cd0aacdac",
+            "sourceColumn": "occupied",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "6eb4e2a7-db4b-4218-a95a-0a3f4a3f702d",
+        "measures": [
+          {
+            "name": "Area occupancy",
+            "expression": "DIVIDE(SUM(operational_areas[occupied]),SUM(operational_areas[staffed_capacity]),0)",
+            "formatString": "0.0%",
+            "lineageTag": "46c2b256-1225-44ed-8270-8723a9ac1c2f"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "operational_areas",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                " Source = PostgreSQL.Database(\"127.0.0.1:5433\", \"acuitycompass\", [CreateNavigationProperties=false]),",
+                " Data = Source{[Schema=\"reporting\",Item=\"operational_areas\"]}[Data]",
+                "in",
+                " Data"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "planner_outcomes",
+        "columns": [
+          {
+            "name": "id",
+            "dataType": "string",
+            "sourceColumn": "id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "created_at",
+            "dataType": "dateTime",
+            "sourceColumn": "created_at",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "status",
+            "dataType": "string",
+            "sourceColumn": "status",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "selected",
+            "dataType": "string",
+            "sourceColumn": "selected",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "started_at",
+            "dataType": "dateTime",
+            "sourceColumn": "started_at",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "completed_at",
+            "dataType": "dateTime",
+            "sourceColumn": "completed_at",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "starting_queue",
+            "dataType": "int64",
+            "sourceColumn": "starting_queue",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "expected_arrivals",
+            "dataType": "double",
+            "sourceColumn": "expected_arrivals",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "observed_queue",
+            "dataType": "int64",
+            "sourceColumn": "observed_queue",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "observed_active",
+            "dataType": "int64",
+            "sourceColumn": "observed_active",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "elapsed_minutes",
+            "dataType": "double",
+            "sourceColumn": "elapsed_minutes",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "coordinator_note",
+            "dataType": "string",
+            "sourceColumn": "coordinator_note",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "predicted_queue",
+            "dataType": "double",
+            "sourceColumn": "predicted_queue",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "demand_model",
+            "dataType": "string",
+            "sourceColumn": "demand_model",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "demand_test_mae",
+            "dataType": "double",
+            "sourceColumn": "demand_test_mae",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "baseline_test_mae",
+            "dataType": "double",
+            "sourceColumn": "baseline_test_mae",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "planner_outcomes",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                " Source = PostgreSQL.Database(\"127.0.0.1:5433\", \"acuitycompass\", [CreateNavigationProperties=false]),",
+                " Data = Source{[Schema=\"reporting\",Item=\"planner_outcomes\"]}[Data]",
+                "in",
+                " Data"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Recorded choices",
+            "expression": "CALCULATE(COUNTROWS(planner_outcomes), planner_outcomes[selected] <> BLANK())",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Completed observations",
+            "expression": "CALCULATE(COUNTROWS(planner_outcomes), planner_outcomes[status] = \"completed\")",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Comparisons",
+            "expression": "COUNTROWS(planner_outcomes)",
+            "formatString": "#,0"
+          }
+        ]
+      }
+    ]
+  }
+}

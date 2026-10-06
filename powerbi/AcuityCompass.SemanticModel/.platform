@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "AcuityCompass"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "bde0fdd9-8413-422e-9116-7e6dd3f068d4"
+  }
+}

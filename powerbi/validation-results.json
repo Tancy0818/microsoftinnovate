@@ -1,0 +1,51 @@
+{
+  "checkedAt": "2026-09-29T03:15:16.320Z",
+  "checks": [
+    "19 PBIP/PBIR definition files pass Microsoft JSON schemas",
+    "All five source queries execute with read-only reporting credentials",
+    "Source columns and relationship references match the model",
+    "Expected full-period KPIs match PostgreSQL"
+  ],
+  "rowCounts": {
+    "dates": 30,
+    "areas": 6,
+    "department_hourly": 720,
+    "area_capacity_hourly": 4320,
+    "visits": 3015
+  },
+  "expected": {
+    "arrivals": 3015,
+    "departures": 3006,
+    "active": 9,
+    "waiting": 4,
+    "occupancyPercent": 13.636363636363635,
+    "snapshotIST": "2026-09-28 00:00",
+    "areas": [
+      {
+        "area_name": "Resuscitation",
+        "occupied": 0,
+        "staffed_capacity": 4
+      },
+      {
+        "area_name": "Examination",
+        "occupied": 4,
+        "staffed_capacity": 18
+      },
+      {
+        "area_name": "Observation",
+        "occupied": 1,
+        "staffed_capacity": 12
+      },
+      {
+        "area_name": "Boarding",
+        "occupied": 1,
+        "staffed_capacity": 10
+      }
+    ]
+  },
+  "notVerified": [
+    "Power BI Desktop opening and rendering",
+    "Power Query refresh in Desktop",
+    "DAX execution in the Power BI engine"
+  ]
+}

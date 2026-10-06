@@ -1,0 +1,7 @@
+area_id,area_name,staffed_capacity,is_bed_area
+"A01","Triage","6","0"
+"A02","Waiting Area","24","0"
+"A03","Resuscitation","4","1"
+"A04","Examination","18","1"
+"A05","Observation","12","1"
+"A06","Boarding","10","1"

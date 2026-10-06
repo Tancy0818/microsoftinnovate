@@ -1,0 +1,32 @@
+{
+  "generator": "AcuityCompass synthetic operational simulation v1",
+  "seed": 28092026,
+  "period_start": "2026-08-29 00:00:00",
+  "period_end_exclusive": "2026-09-28 00:00:00",
+  "timezone": "Asia/Kolkata (UTC+05:30), timestamps have no offset in CSV",
+  "source": "Entirely fictional; no real patient or hospital source",
+  "rows": {
+    "areas": 6,
+    "dates": 30,
+    "visits": 3015,
+    "flow_events": 19249,
+    "area_capacity_hourly": 4320,
+    "department_hourly": 720
+  },
+  "checks": "Unique IDs, continuous stage timelines, no overlapping bed assignments, no bed-capacity overflow, hourly census conservation passed",
+  "latest_snapshot": {
+    "hour_start": "2026-09-27 23:00:00",
+    "snapshot_time": "2026-09-28 00:00:00",
+    "report_date": "2026-09-27",
+    "hour_of_day": 23,
+    "arrivals": 5,
+    "departures": 5,
+    "active_patients": 9,
+    "patients_waiting": 4,
+    "average_elapsed_wait_minutes": 74.25,
+    "occupied_beds": 6,
+    "staffed_beds": 44,
+    "high_acuity_waiting_over_15": 0,
+    "synthetic": 1
+  }
+}

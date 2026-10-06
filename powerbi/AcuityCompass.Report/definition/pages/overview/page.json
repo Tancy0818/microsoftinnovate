@@ -1,0 +1,194 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "overview",
+  "displayName": "Combined ED dashboard",
+  "displayOption": "FitToPage",
+  "height": 1180,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F4F6FA'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "arrivals_departures",
+      "target": "title",
+      "type": "NoFilter"
+    },
+    {
+      "source": "arrivals_departures",
+      "target": "subtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "arrivals_departures",
+      "target": "footer",
+      "type": "NoFilter"
+    },
+    {
+      "source": "arrivals_departures",
+      "target": "kpi_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "arrivals_departures",
+      "target": "kpi_2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "arrivals_departures",
+      "target": "kpi_3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "arrivals_departures",
+      "target": "kpi_4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "arrivals_departures",
+      "target": "kpi_5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "arrivals_departures",
+      "target": "area_capacity",
+      "type": "NoFilter"
+    },
+    {
+      "source": "arrivals_departures",
+      "target": "urgency",
+      "type": "NoFilter"
+    },
+    {
+      "source": "arrivals_departures",
+      "target": "snapshot",
+      "type": "NoFilter"
+    },
+    {
+      "source": "area_capacity",
+      "target": "title",
+      "type": "NoFilter"
+    },
+    {
+      "source": "area_capacity",
+      "target": "subtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "area_capacity",
+      "target": "footer",
+      "type": "NoFilter"
+    },
+    {
+      "source": "area_capacity",
+      "target": "kpi_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "area_capacity",
+      "target": "kpi_2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "area_capacity",
+      "target": "kpi_3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "area_capacity",
+      "target": "kpi_4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "area_capacity",
+      "target": "kpi_5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "area_capacity",
+      "target": "arrivals_departures",
+      "type": "NoFilter"
+    },
+    {
+      "source": "area_capacity",
+      "target": "urgency",
+      "type": "NoFilter"
+    },
+    {
+      "source": "area_capacity",
+      "target": "snapshot",
+      "type": "NoFilter"
+    },
+    {
+      "source": "urgency",
+      "target": "title",
+      "type": "NoFilter"
+    },
+    {
+      "source": "urgency",
+      "target": "subtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "urgency",
+      "target": "footer",
+      "type": "NoFilter"
+    },
+    {
+      "source": "urgency",
+      "target": "kpi_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "urgency",
+      "target": "kpi_2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "urgency",
+      "target": "kpi_3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "urgency",
+      "target": "kpi_4",
+      "type": "NoFilter"
+    },
+    {
+      "source": "urgency",
+      "target": "kpi_5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "urgency",
+      "target": "arrivals_departures",
+      "type": "NoFilter"
+    },
+    {
+      "source": "urgency",
+      "target": "area_capacity",
+      "type": "NoFilter"
+    },
+    {
+      "source": "urgency",
+      "target": "snapshot",
+      "type": "NoFilter"
+    }
+  ]
+}
